@@ -16,19 +16,25 @@ async function printScream(url: string, nomeArquivo: string): Promise<void> {
 
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
+  // calcula a altura total da pagina para garantir que o PDF capture todo o conteudo
+  const height = await page.evaluate(() => {
+    return Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+  });
+
   const filePath = path.resolve(process.cwd(), nomeArquivo);
 
   console.log(`Saving screenshot to ${filePath}...`);
 
   await page.pdf({
     path: filePath,
-    format: 'A4',
+    width: '1440px',
+    height: `${height}px`,
     printBackground: true,
     margin: {
-      top: '20px',
-      right: '20px',
-      bottom: '20px',
-      left: '20px',
+      top: '0px',
+      right: '0px',
+      bottom: '0px',
+      left: '0px',
     },
   });
 
