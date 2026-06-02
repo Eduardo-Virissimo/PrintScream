@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PrintScream</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">Print<span>Scream</span></div>
+      <div class="badge">v2.0.0</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Página inteira,<br /><em>sem scrollar</em> nada.</h1>
+        <p>
+          Cole a URL, escolha onde salvar e baixe o PDF completo do site, com um visual mais limpo e
+          direto.
+        </p>
+      </section>
+
+      <section class="card" aria-label="Gerar PDF">
+        <form id="pdf-form" class="form">
+          <div class="input-group">
+            <label for="url">URL do site</label>
+            <input
+              type="text"
+              id="url"
+              name="url"
+              placeholder="https://exemplo.com.br"
+              autocomplete="off"
+              spellcheck="false"
+              required
+            />
+          </div>
+
+          <div class="row">
+            <div class="input-group">
+              <label for="fileName">Nome do arquivo</label>
+              <input
+                type="text"
+                id="fileName"
+                name="fileName"
+                value="meu-pdf.pdf"
+                autocomplete="off"
+                spellcheck="false"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="outputPath">Arquivo de saída</label>
+              <div class="inline-row">
+                <input
+                  id="outputPath"
+                  name="outputPath"
+                  type="text"
+                  placeholder="Clique em escolher..."
+                  readonly
+                />
+                <button id="choosePath" type="button" class="secondary-button">Escolher</button>
+              </div>
+            </div>
+          </div>
+
+          <button id="submitButton" type="submit" class="generate">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Gerar PDF
+          </button>
+
+          <div id="statusBox" class="status-box neutral" role="status" aria-live="polite">
+            Aguardando a primeira geração.
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>printscream · feito com puppeteer &amp; typescript</footer>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>
