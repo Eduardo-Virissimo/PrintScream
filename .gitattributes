@@ -1,2 +1,5 @@
 src/renderer/styles.css linguist-vendored
 src/renderer/*.css linguist-vendored
+
+src/renderer/index.html linguist-vendored
+src/renderer/*.html linguist-vendored
