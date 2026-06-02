@@ -9,8 +9,9 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "verbatimModuleSyntax": false,
+    "rootDir": "./src",
     "outDir": "./dist",
     "sourceMap": true
   },
-  "include": ["**/*.ts"]
+  "include": ["src/**/*.ts", "src/electron/preload.ts"]
 }

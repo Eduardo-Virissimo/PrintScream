@@ -1,17 +1,22 @@
 {
   "name": "gerador-pdf",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Desktop application for generating PDFs from URLs.",
+  "main": "dist/electron/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cli": "npm run build:ts && node dist/cli.js",
+    "build:ts": "tsc",
+    "build:renderer": "copyfiles -u 2 \"src/renderer/**/*\" dist/renderer",
+    "build": "npm run build:ts && npm run build:renderer",
+    "electron": "npm run build && electron .",
+    "dist": "npm run build && electron-builder"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Eduardo-Virissimo/PrintScream.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Eduardo-Virissimo",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Eduardo-Virissimo/PrintScream/issues"
@@ -22,8 +27,32 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
+    "copyfiles": "^2.4.1",
+    "electron": "^42.3.1",
+    "electron-builder": "^26.8.1",
     "prettier": "^3.8.3",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
+  },
+  "build": {
+    "appId": "com.printscream.desktop",
+    "productName": "PrintScream",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": ".cache/puppeteer",
+        "to": "puppeteer"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "signAndEditExecutable": false
+    }
   }
 }
