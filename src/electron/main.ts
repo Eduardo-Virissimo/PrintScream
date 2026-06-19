@@ -1,6 +1,10 @@
-import path from 'node:path';
 import { app, BrowserWindow, dialog, ipcMain } from 'electron';
-import { generatePdf } from '../core/generatePdf';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { generatePdf } from '../core/generatePdf.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 if (app.isPackaged) {
   process.env.PUPPETEER_CACHE_DIR = path.join(process.resourcesPath, 'puppeteer');
@@ -11,13 +15,13 @@ let mainWindow: BrowserWindow | null = null;
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
-    height: 820,
+    height: 900,
     minWidth: 980,
     minHeight: 700,
     autoHideMenuBar: true,
     backgroundColor: '#f6efe7',
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.cjs'),
       nodeIntegration: false,
       contextIsolation: true,
     },
@@ -46,7 +50,10 @@ ipcMain.handle('dialog:save-pdf', async (_event, defaultName: string = 'meu-pdf.
 
 ipcMain.handle(
   'pdf:generate',
-  async (_event, payload: { url: string; outputPath: string }): Promise<string> => {
+  async (
+    _event,
+    payload: { url: string; outputPath: string; mobile?: boolean }
+  ): Promise<string> => {
     if (!payload?.url || !payload?.outputPath) {
       throw new Error('URL and output path are required');
     }
@@ -57,7 +64,11 @@ ipcMain.handle(
       throw new Error('Invalid URL provided');
     }
 
-    return generatePdf({ url: payload.url, outputPath: payload.outputPath });
+    return generatePdf({
+      url: payload.url,
+      outputPath: payload.outputPath,
+      mobile: payload.mobile,
+    });
   }
 );
 

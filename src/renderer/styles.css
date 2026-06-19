@@ -256,6 +256,54 @@ button:disabled {
   border-color: #b7dfc9;
 }
 
+.mobile-option {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.mobile-option:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.mobile-option input {
+  display: none;
+}
+
+.mobile-option::before {
+  content: 'Clique para ativar';
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+
+.mobile-option:has(input:checked) {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.mobile-option:has(input:checked)::before {
+  content: '✓ Ativado';
+  color: var(--accent);
+  font-weight: 500;
+}
+
 footer {
   text-align: center;
   padding: 1rem;
