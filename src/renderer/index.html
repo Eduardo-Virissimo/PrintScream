@@ -19,7 +19,7 @@
   <body>
     <header>
       <div class="logo">Print<span>Scream</span></div>
-      <div class="badge">v2.0.0</div>
+      <div class="badge">v2.1.0</div>
     </header>
 
     <main>
@@ -61,17 +61,25 @@
             </div>
 
             <div class="input-group">
-              <label for="outputPath">Arquivo de saída</label>
-              <div class="inline-row">
-                <input
-                  id="outputPath"
-                  name="outputPath"
-                  type="text"
-                  placeholder="Clique em escolher..."
-                  readonly
-                />
-                <button id="choosePath" type="button" class="secondary-button">Escolher</button>
-              </div>
+              <label for="mobile">Visualização mobile</label>
+
+              <label class="mobile-option">
+                <input type="checkbox" id="mobile" name="mobile" />
+              </label>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="outputPath">Arquivo de saída</label>
+            <div class="inline-row">
+              <input
+                id="outputPath"
+                name="outputPath"
+                type="text"
+                placeholder="Clique em escolher..."
+                readonly
+              />
+              <button id="choosePath" type="button" class="secondary-button">Escolher</button>
             </div>
           </div>
 
@@ -103,6 +111,6 @@
 
     <footer>printscream · feito com puppeteer &amp; typescript</footer>
 
-    <script src="./renderer.js"></script>
+    <script type="module" src="./renderer.js"></script>
   </body>
 </html>
